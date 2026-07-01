@@ -15,16 +15,16 @@ class PepParsePipeline:
     def open_spider(self, spider):
         """Инициализация структур и создание папки для результатов."""
         spider.logger.info('Pipeline открыт. Начинаем сбор статусов PEP.')
-        
+
         self.status_count = defaultdict(int)
-        
+
         feeds = spider.crawler.settings.get('FEEDS')
         if feeds:
             feed_path = list(feeds.keys())[0]
             self.results_dir = Path(feed_path).parent
         else:
             self.results_dir = Path('results')
-        
+
         self.results_dir.mkdir(exist_ok=True)
 
     def process_item(self, item, spider):
